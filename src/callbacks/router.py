@@ -20,7 +20,7 @@ def register_router(app: Dash):
             "/menor-mortalidad": ("10 Ciudades con Menor Mortalidad", "pie", False),
             "/causas": ("Top 10 Principales Causas de Muerte", "tabla", True),
             "/sexo": ("Comparación por Sexo y Departamento", "apiladas", False),
-            "/edades": ("Distribución de Muertes por Ciclo de Vida", "histograma", False)
+            "/edades": ("Distribución de Muertes por Categoría de Edad", "histograma", False)
         }
 
         # Renderiza la vista correspondiente
