@@ -99,7 +99,7 @@ def register_callbacks(app: Dash):
         elif pathname == "/edades":
             return html.Div([
                 html.H2(
-                    "Distribución de Muertes por Ciclo de Vida",
+                    "Distribución de Muertes por Categoría de Edad",
                     style={'borderBottom': '2px solid #eee', 'paddingBottom': '10px'}
                 ),
 

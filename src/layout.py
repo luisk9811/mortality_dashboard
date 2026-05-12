@@ -82,13 +82,13 @@ def create_layout() -> html.Div:
 
         # Menú de navegación
         html.Div([
-            dcc.Link("📍 Mapa de Mortalidad", href="/", style=LINK_STYLE),
-            dcc.Link("📈 Serie de Tiempo", href="/meses", style=LINK_STYLE),
-            dcc.Link("⚠️ Ciudades Violentas", href="/violencia", style=LINK_STYLE),
-            dcc.Link("✅ Menor Mortalidad", href="/menor-mortalidad", style=LINK_STYLE),
-            dcc.Link("📋 Top Causas", href="/causas", style=LINK_STYLE),
-            dcc.Link("🚻 Sexo y Departamento", href="/sexo", style=LINK_STYLE),
-            dcc.Link("🎂 Ciclo de Vida", href="/edades", style=LINK_STYLE),
+            dcc.Link("Mapa de Mortalidad", href="/", style=LINK_STYLE),
+            dcc.Link("Serie de Tiempo", href="/meses", style=LINK_STYLE),
+            dcc.Link("Ciudades Violentas", href="/violencia", style=LINK_STYLE),
+            dcc.Link("Menor Mortalidad", href="/menor-mortalidad", style=LINK_STYLE),
+            dcc.Link("Top Causas", href="/causas", style=LINK_STYLE),
+            dcc.Link("Sexo y Departamento", href="/sexo", style=LINK_STYLE),
+            dcc.Link("Categoría de Edad", href="/edades", style=LINK_STYLE),
         ])
     ], style=SIDEBAR_STYLE)
 
