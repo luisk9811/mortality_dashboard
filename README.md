@@ -1,156 +1,384 @@
-# Dashboard de Mortalidad 2019
+# Actividad 4: Aplicación web interactiva para el análisis de mortalidad en Colombia
+
+## Universidad de La Salle  
+### Maestría en Inteligencia Artificial
+
+## Integrantes
+
+- Luis Carlos Rodríguez Díaz
+- Maydda Ginneth Rodríguez Fernández
+- Yony Yu Cen
+
+---
+
+## Aplicación desplegada
+
+La aplicación se encuentra disponible públicamente en Render:
+
+https://mortality-dashboard-colombia.onrender.com/
+
+---
+---
+
+# Dashboard de Mortalidad en Colombia - 2019
+
+---
 
 ## Introducción del proyecto
 
-Este proyecto es una aplicación web interactiva desarrollada con Dash para explorar la mortalidad en Colombia durante 2019. La aplicación ofrece visualizaciones geográficas, temporales y de causa, permitiendo análisis intuitivos de los patrones de mortalidad en el país.
+Este proyecto consiste en el desarrollo de una aplicación web interactiva para el análisis de mortalidad en Colombia durante el año 2019, utilizando Python, Dash y Plotly.
+
+La aplicación permite explorar de manera visual e intuitiva distintos patrones de mortalidad mediante gráficos interactivos, mapas geográficos y tablas dinámicas, facilitando el análisis de tendencias demográficas, regionales y epidemiológicas a partir de datos oficiales del DANE.
+
+El dashboard fue desarrollado como parte de una actividad académica enfocada en análisis de datos, visualización interactiva y despliegue de aplicaciones web dinámicas en la nube.
+
+---
 
 ## Objetivo
 
-El objetivo de la aplicación es analizar la distribución de muertes por departamento, identificar tendencias mensuales, encontrar las ciudades con más homicidios y menor mortalidad, comparar muertes por género y departamento, y mostrar las principales causas de muerte y la distribución por grupo de edad.
+Desarrollar una aplicación web dinámica que permita analizar y visualizar datos de mortalidad en Colombia durante el año 2019, identificando:
+
+- Distribución geográfica de muertes por departamento.
+- Tendencias temporales de mortalidad.
+- Ciudades con mayores índices de homicidios.
+- Municipios con menor mortalidad.
+- Principales causas de muerte.
+- Diferencias de mortalidad por sexo y región.
+- Distribución de mortalidad por grupos etarios.
+
+La aplicación busca facilitar la interpretación de grandes volúmenes de datos mediante visualizaciones interactivas y accesibles.
+
+---
+
+## Características principales
+
+- Dashboard interactivo desarrollado con Dash.
+- Navegación dinámica mediante menú lateral.
+- Visualizaciones avanzadas con Plotly.
+- Mapa geográfico de mortalidad por departamento.
+- Procesamiento y transformación de datos con pandas.
+- Uso de formato parquet para mejorar rendimiento.
+- Arquitectura modular y reutilizable.
+- Preparado para despliegue en plataformas PaaS como Render.
+
+---
+
+## Arquitectura general
+
+```text
+Usuario
+   │
+   ▼
+Aplicación Dash
+   │
+   ├── Procesamiento de datos (pandas)
+   ├── Generación de visualizaciones (Plotly)
+   ├── Navegación y callbacks (Dash)
+   └── Renderizado web interactivo
+```
+
+---
 
 ## Estructura del proyecto
 
-- `src/` - Código fuente de la aplicación Dash.
-  - `app.py` - Archivo principal que inicializa la aplicación y define el layout global.
-  - `data_processing.py` - Carga y prepara los datos para las visualizaciones.
-  - `figure_cache.py` - Construye y almacena en caché las figuras y tablas usadas en la interfaz.
-  - `callbacks/router.py` - Controla la navegación entre rutas y páginas.
-  - `components/sidebar.py` - Define el menú lateral de navegación.
-  - `pages/views.py` - Define layouts reutilizables para cada página.
-- `data/` - Contiene el dataset procesado en formato `parquet`.
-  - `clean_mortality.parquet` - Dataset principal de mortalidad.
-- `assets/` - Recursos estáticos usados por la aplicación.
-  - `colombia.geojson` - Archivo GeoJSON con los límites geográficos de los departamentos.
-- `requirements.txt` - Lista de dependencias necesarias para ejecutar la aplicación.
-- `README.md` - Documento de instrucciones y descripción del proyecto.
+```text
+mortality_dashboard/
+│
+├── src/
+│   ├── app.py
+│   ├── data_processing.py
+│   ├── figure_cache.py
+│   │
+│   ├── callbacks/
+│   │   └── router.py
+│   │
+│   ├── components/
+│   │   └── sidebar.py
+│   │
+│   └── pages/
+│       └── views.py
+│
+├── data/
+│   └── clean_mortality.parquet
+│
+├── assets/
+│   └── colombia.geojson
+│
+├── requirements.txt
+└── README.md
+```
+
+### Descripción de archivos principales
+
+| Archivo / Carpeta | Descripción |
+|---|---|
+| `app.py` | Punto de entrada principal de la aplicación Dash |
+| `data_processing.py` | Procesamiento, limpieza y transformación de datos |
+| `figure_cache.py` | Construcción y almacenamiento de figuras |
+| `callbacks/router.py` | Manejo de navegación entre páginas |
+| `components/sidebar.py` | Menú lateral de navegación |
+| `pages/views.py` | Layouts y vistas del dashboard |
+| `data/` | Dataset procesado |
+| `assets/` | Recursos estáticos y archivos geográficos |
+
+---
+
+## Procesamiento de datos
+
+Durante el desarrollo se realizaron diferentes tareas de preparación y transformación de datos utilizando `pandas`:
+
+- Limpieza de registros inconsistentes.
+- Agrupación de datos por departamento y municipio.
+- Cálculo de totales de mortalidad.
+- Clasificación por grupos etarios.
+- Integración de información geográfica mediante GeoJSON.
+- Conversión de archivos Excel a formato parquet para optimizar el rendimiento de carga.
+
+---
 
 ## Requisitos
 
-- Python 3.11+ (recomendado)
-- dash==4.1.0
-- pandas==3.0.2
-- plotly==6.7.0
-- pyarrow==24.0.0
-- gunicorn==26.0.0
+### Software requerido
 
-> Nota: la versión de Python puede variar según el entorno, pero se recomienda usar Python 3.11 o superior para compatibilidad con las dependencias actuales.
+- Python 3.11 o superior
+- pip
+- Git
 
-## Software utilizado
+### Librerías principales
 
-- Python
 - Dash
 - Plotly
 - pandas
 - pyarrow
-- Gunicorn (para despliegue en producción)
+- gunicorn
+
+---
 
 ## Instalación local
 
-1. Clonar el repositorio:
+### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/luisk9811/mortality_dashboard.git
 cd mortality_dashboard
 ```
 
-2. Crear y activar un entorno virtual:
+---
+
+### 2. Crear entorno virtual
+
+#### Windows
 
 ```bash
 python -m venv venv
-venv\Scripts\Activate
+venv\Scripts\activate
 ```
 
-3. Instalar dependencias:
+#### Linux / Mac
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+### 3. Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Verificar que el archivo de datos exista en `data/clean_mortality.parquet` y que el archivo geoespacial exista en `assets/colombia.geojson`.
+---
 
-5. Ejecutar la aplicación:
+### 4. Ejecutar la aplicación
 
 ```bash
 python src/app.py
 ```
 
-6. Abrir el navegador en `http://localhost:8080`.
+---
+
+### 5. Abrir en el navegador
+
+```text
+http://localhost:8080
+```
+
+---
 
 ## Despliegue en Render
 
-Para desplegar en Render, sigue estos pasos generales:
+La aplicación fue preparada para ser desplegada en Render utilizando Gunicorn.
 
-1. Crear un nuevo servicio web en Render y conectar el repositorio.
-2. Usar Python 3.11 o una versión compatible.
-3. Configurar el comando de inicio (Start Command):
+### Pasos realizados
+
+1. Crear un nuevo servicio web en Render.
+2. Conectar el repositorio de GitHub.
+3. Configurar el entorno Python.
+4. Instalar dependencias desde `requirements.txt`.
+5. Configurar el comando de inicio.
+
+### Start Command
 
 ```bash
 cd src && gunicorn app:server --bind 0.0.0.0:$PORT
 ```
 
-4. Asegurarse de que los archivos `data/clean_mortality.parquet` y `assets/colombia.geojson` estén incluidos en el repositorio o disponibles en el entorno de despliegue.
-5. Configurar `Build Command` si es necesario:
+### Build Command
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> Render detectará el puerto a través de la variable `$PORT`, y la aplicación debe exponerse usando el objeto `server` de Dash.
+### Consideraciones
 
-## Visualizaciones y hallazgos
+- El dataset parquet y el archivo GeoJSON deben estar incluidos en el repositorio.
+- Render asigna automáticamente el puerto mediante la variable `$PORT`.
+- La aplicación utiliza el objeto `server` de Dash para producción.
 
-### 1. Mapa de Mortalidad por Departamento
+---
 
-- Visualización: gráfico de coropletas que muestra el total de muertes por departamento.
-- Hallazgo: permite identificar departamentos con mayor concentración de muertes y comparar regiones del país.
+## Software utilizado
 
-![mapa_mortalidad](resources\image.png)
+| Herramienta | Uso |
+|---|---|
+| Python | Lenguaje principal |
+| Dash | Framework web interactivo |
+| Plotly | Visualizaciones dinámicas |
+| pandas | Procesamiento de datos |
+| pyarrow | Manejo de archivos parquet |
+| Gunicorn | Servidor WSGI para despliegue |
+| Render | Plataforma de despliegue |
 
-### 2. Serie de Tiempo de Muertes por Mes
+---
 
-- Visualización: línea temporal de muertes mensuales.
-- Hallazgo: revela tendencias estacionales y posibles picos de mortalidad a lo largo del año.
+# Visualizaciones y análisis de resultados
 
-![line_temporal](resources\image-1.png)
+---
 
-### 3. Top 5 Ciudades Más Violentas
+## 1. Distribución Geográfica de Muertes
 
-- Visualización: gráfico de barras con las ciudades donde se registraron más homicidios.
-- Hallazgo: facilita detectar municipios con mayor violencia letal.
+Esta visualización presenta un mapa coroplético de Colombia mostrando el total de muertes por departamento.
 
-![top_5](resources/image-6.png)
+### Hallazgos
 
-### 4. 10 Ciudades con Menor Mortalidad
+- Antioquia y Valle del Cauca presentan las mayores concentraciones de mortalidad.
+- Los departamentos amazónicos y regiones menos pobladas muestran menores registros.
+- Se evidencian diferencias regionales importantes en la distribución de mortalidad.
 
-- Visualización: gráfico de pastel con los municipios con menor número de muertes.
-- Hallazgo: muestra qué localidades presentan menor impacto mortal en el dataset.
+![Mapa de Mortalidad](resources/image.png)
 
-![10_ciudades](resources/image-4.png)
+---
 
-### 5. Top 10 Principales Causas de Muerte
+## 2. Tendencia Temporal de Muertes
 
-- Visualización: tabla con las principales causas de muerte ordenadas por casos registrados.
-- Hallazgo: identifica las causas más frecuentes, útil para priorizar intervenciones de salud pública.
+Gráfico de líneas que representa el comportamiento mensual de las muertes durante el año 2019.
 
-![top_10](resources/image-5.png)
+### Hallazgos
 
-### 6. Comparación por Sexo y Departamento
+- Se observan variaciones moderadas a lo largo del año.
+- Enero, Julio y diciembre presentan incrementos notorios en mortalidad.
+- Febrero registra uno de los valores más bajos del periodo analizado.
 
-- Visualización: gráfico de barras apiladas que muestra muertes por género en cada departamento.
-- Hallazgo: evidencia diferencias en mortalidad entre hombres y mujeres por región.
+![Serie Temporal](resources/image-1.png)
 
-![comparacion](resources\image-2.png)
+---
 
-### 7. Distribución de Muertes por Categoría de Edad
+## 3. Top 5 Ciudades Más Violentas
 
-- Visualización: gráfico de barras que muestra muertes por grupo de edad.
-- Hallazgo: ayuda a ver qué segmentos etarios presentan mayor mortalidad.
+Gráfico de barras que muestra los municipios con mayor cantidad de homicidios registrados utilizando el código X95.
 
-![distribucion](resources\image-3.png)
+### Hallazgos
 
+- Santiago de Cali registra el mayor número de homicidios.
+- Bogotá D.C. y Medellín también presentan altos niveles de violencia letal.
+- La visualización permite identificar focos urbanos críticos.
 
-## Notas adicionales
+![Ciudades Violentas](resources/image-6.png)
 
-- La aplicación usa un menú lateral para navegar entre diferentes análisis.
-- El dataset y el GeoJSON son necesarios para cargar las visualizaciones correctamente.
-- Si faltan datos o archivos, la aplicación levantará un error indicando la ruta faltante.
+---
+
+## 4. Municipios con Menor Mortalidad
+
+Visualización de los municipios con menor cantidad de muertes registradas.
+
+### Hallazgos
+
+- Los municipios con menor mortalidad corresponden principalmente a poblaciones pequeñas o aisladas.
+- Se observa una distribución homogénea entre las localidades analizadas.
+
+![Menor Mortalidad](resources/image-4.png)
+
+---
+
+## 5. Principales Causas de Muerte
+
+Tabla interactiva con las causas de muerte más frecuentes registradas en Colombia durante 2019.
+
+### Hallazgos
+
+- El infarto agudo de miocardio representa la principal causa de muerte.
+- Las enfermedades cardiovasculares y respiratorias predominan en los primeros lugares.
+- Los homicidios aparecen entre las principales causas analizadas.
+
+![Top Causas](resources/image-5.png)
+
+---
+
+## 6. Comparación por Sexo y Departamento
+
+Gráfico de barras apiladas que compara la mortalidad por género en cada departamento.
+
+### Hallazgos
+
+- En la mayoría de departamentos se registra mayor mortalidad masculina.
+- Bogotá D.C., Antioquia y Valle del Cauca presentan los valores más altos para ambos sexos.
+- Las diferencias de mortalidad entre géneros son visibles en varias regiones.
+
+![Sexo y Departamento](resources/image-2.png)
+
+---
+
+## 7. Distribución por Categoría de Edad
+
+Visualización de mortalidad agrupada por categorías etarias.
+
+### Hallazgos
+
+- La categoría de vejez concentra la mayor cantidad de muertes.
+- La mortalidad aumenta considerablemente a partir de la adultez intermedia.
+- Las categorías infantiles presentan menor incidencia relativa.
+
+![Categoría de Edad](resources/image-3.png)
+
+---
+
+## Fuentes de datos
+
+Los datos utilizados provienen de:
+
+- Departamento Administrativo Nacional de Estadística (DANE)
+- Estadísticas Vitales - EEVV 2019
+
+Archivos utilizados:
+
+- NoFetal2019.xlsx
+- CodigosDeMuerte.xlsx
+- Divipola.xlsx
+
+---
+
+## Conclusiones
+
+El análisis permitió identificar patrones importantes de mortalidad en Colombia durante 2019, evidenciando diferencias regionales, variaciones temporales y cambios significativos según sexo y grupo etario.
+
+La implementación del dashboard utilizando Dash y Plotly facilitó la construcción de una herramienta interactiva capaz de transformar datos complejos en visualizaciones intuitivas y comprensibles.
+
+Además, el proyecto fortaleció competencias relacionadas con:
+
+- análisis de datos,
+- visualización interactiva,
+- desarrollo web con Python,
+- procesamiento de información,
+- y despliegue de aplicaciones en la nube.
